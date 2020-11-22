@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-  BloomFilter *new_b = new BloomFilter();
+  BloomFilter *new_b = new BloomFilter(128);
   new_b->add_string("goran");
   new_b->add_string("jonathan");
   new_b->add_string("shalini");
@@ -50,5 +50,7 @@ int main() {
   std::cout << "lookup - swim: " << new_b->lookup("swim") << "\n";
   std::cout << "lookup - steak: " << new_b->lookup("steak") << "\n";
   std::cout << "lookup - cpp: " << new_b->lookup("cpp") << "\n";
+
+  delete new_b;
   return 0;
 }

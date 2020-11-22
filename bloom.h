@@ -9,13 +9,14 @@ typedef uint32_t uint32;
 typedef uint64_t uint64;
 typedef std::pair<uint64, uint64> uint128;
 typedef std::pair<uint128, uint128> filter_pair;
+typedef std::array<uint64, 4> filter_256;
 
 namespace std {
 
 class BloomFilter {
 
 public:
-  BloomFilter();
+  BloomFilter(int filter_size);
   ~BloomFilter();
   bool lookup(string str);
   void add_string(string str);
@@ -24,6 +25,8 @@ public:
 
 protected:
   size_t filter_count_;
-  filter_pair filter_;
+  uint64 *filter_;
+  int filter_size_;
+  int filter_bits_;
 };
 } // namespace std

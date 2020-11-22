@@ -8,7 +8,7 @@ typedef uint8_t uint8;
 typedef uint32_t uint32;
 typedef uint64_t uint64;
 typedef std::pair<uint64, uint64> uint128;
-
+typedef std::pair<uint128, uint128> filter_pair;
 namespace std {
 
 class BloomFilter {
@@ -23,6 +23,6 @@ class BloomFilter {
 
  protected:
   size_t filter_count_;
-  uint128 filter_;
+  filter_pair filter_;
 };
 }

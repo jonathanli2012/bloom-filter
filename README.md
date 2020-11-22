@@ -1,2 +1,2 @@
-# bloom_filter
-bloom filter implementation
+# bloom-filter
+bloom filter implementation using google cityhash

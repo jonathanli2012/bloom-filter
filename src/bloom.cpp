@@ -1,17 +1,20 @@
 #include "bloom.h"
 
-#define DIV_64_SHIFT 6
-
 namespace std {
 
 BloomFilter::BloomFilter(int filter_size) {
   filter_ = new uint64[filter_size];
+  for(int i = 0; i<filter_size;i++) {
+    filter_[i] = 0;
+  }
   filter_count_ = 0;
   filter_size_ = filter_size;
   filter_bits_ = filter_size << DIV_64_SHIFT;
 }
 
-BloomFilter::~BloomFilter() {}
+BloomFilter::~BloomFilter() {
+  delete[] filter_;
+}
 
 void BloomFilter::add_string(string str) {
   uint64 hashed_val = CityHash64(str.data(), str.length());
@@ -28,6 +31,7 @@ bool BloomFilter::lookup(string str) {
   return (filter_[filter_index] &
           (1 << (bit_on - (filter_index << DIV_64_SHIFT)))) > 0;
 }
+
 
 size_t BloomFilter::filter_count() { return filter_count_; }
 

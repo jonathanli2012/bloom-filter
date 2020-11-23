@@ -2,7 +2,7 @@
 C++ Bloom Filter implementation
 
 ## Test
-Includes a test case inserting 100 words with piped output to export.txt
+Includes user defined test cases inserting 0-1000 words with piped output to export.txt
 ```
 $ python3 run_example.py
 ```
@@ -11,6 +11,7 @@ Additional tests can be compiled using
 ```
 $ make src_test
 ```
+Because this package is lightweight, compiling with -Ofast will garner best results
 ## Cleanup
 ```
 $ make clean

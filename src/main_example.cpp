@@ -50,6 +50,7 @@ int main() {
   std::cout << "lookup - swim: " << new_b->lookup("swim") << "\n";
   std::cout << "lookup - steak: " << new_b->lookup("steak") << "\n";
   std::cout << "lookup - cpp: " << new_b->lookup("cpp") << "\n";
+  std::cout << "lookup - jess: " << new_b->lookup("jess") << "\n";
 
   delete new_b;
   return 0;

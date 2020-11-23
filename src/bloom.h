@@ -15,6 +15,7 @@ namespace std {
 class BloomFilter {
 
 public:
+
   /**
    * @brief Constructor for BloomFilter type
    *

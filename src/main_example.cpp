@@ -1,5 +1,5 @@
 #include "bloom.h"
-#include "city.h"
+#include "cityhash/city.h"
 #include <iostream>
 
 using namespace std;

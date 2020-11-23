@@ -1,4 +1,22 @@
-# bloom-filter
-bloom filter implementation using google cityhash
+# C++ Bloom Filter
+C++ Bloom Filter implementation
 
-test by running python3 run_example.py
+## Test
+Includes a test case inserting 100 words with piped output to export.txt
+```
+$ python3 run_example.py
+```
+## Compiling
+Additional tests can be compiled using
+```
+$ make src_test
+```
+## Cleanup
+```
+$ make clean
+```
+## Notes
+This implementation uses google's cityhash which is included in the src/cityhash directory
+
+
+

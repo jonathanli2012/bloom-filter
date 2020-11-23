@@ -1,15 +1,10 @@
 #include <mutex>
-
 #include <stdint.h>
-#include <stdlib.h> // for size_t.
-#include <utility>
+#include <stdlib.h>
+#include <bitset>
+#include "cityhash/city.h"
 
-typedef uint8_t uint8;
-typedef uint32_t uint32;
 typedef uint64_t uint64;
-typedef std::pair<uint64, uint64> uint128;
-typedef std::pair<uint128, uint128> filter_pair;
-typedef std::array<uint64, 4> filter_256;
 
 namespace std {
 
@@ -22,6 +17,7 @@ public:
   void add_string(string str);
   size_t filter_count();
   string expose_filter();
+  size_t filter_ratio();
 
 protected:
   size_t filter_count_;

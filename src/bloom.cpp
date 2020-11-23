@@ -1,6 +1,4 @@
 #include "bloom.h"
-#include "city.h"
-#include <bitset>
 
 #define DIV_64_SHIFT 6
 
@@ -10,7 +8,7 @@ BloomFilter::BloomFilter(int filter_size) {
   filter_ = new uint64[filter_size];
   filter_count_ = 0;
   filter_size_ = filter_size;
-  filter_bits_ = filter_size << 6;
+  filter_bits_ = filter_size << DIV_64_SHIFT;
 }
 
 BloomFilter::~BloomFilter() {}
@@ -30,6 +28,7 @@ bool BloomFilter::lookup(string str) {
   return (filter_[filter_index] &
           (1 << (bit_on - (filter_index << DIV_64_SHIFT)))) > 0;
 }
+
 size_t BloomFilter::filter_count() { return filter_count_; }
 
 string BloomFilter::expose_filter() {
@@ -38,5 +37,9 @@ string BloomFilter::expose_filter() {
     s.append(std::bitset<64>(filter_[i]).to_string());
   }
   return s;
+}
+
+size_t filter_ratio() {
+  return 0;
 }
 } // namespace std

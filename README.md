@@ -1,12 +1,20 @@
 # C++ Bloom Filter
 C++ Bloom Filter implementation
 
+## Usage
+Compiles a command line interface "./bloom" with insert/lookup/print filter functionality
+```
+$ make
+```
+or
+```
+$ make bloom
+```
 ## Test
 Includes user defined test cases inserting 0-1000 words with piped output to export.txt
 ```
 $ python3 run_example.py
 ```
-## Compiling
 Additional tests can be compiled using
 ```
 $ make src_test

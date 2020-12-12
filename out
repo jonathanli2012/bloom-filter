@@ -1,0 +1,35 @@
+add_count: 1
+
+compile time: 3.4627699851989746
+run time: 0.0024101734161376953
+filter correctness test passed
+filter lookup miss rate: 0.0
+filter lookup miss count: 0
+add_count: 201
+
+compile time: 3.9748165607452393
+run time: 0.002171754837036133
+filter correctness test passed
+filter lookup miss rate: 0.0425531914893617
+filter lookup miss count: 34
+add_count: 401
+
+compile time: 4.629412412643433
+run time: 0.0020940303802490234
+filter correctness test passed
+filter lookup miss rate: 0.11853088480801335
+filter lookup miss count: 71
+add_count: 601
+
+compile time: 5.408468246459961
+run time: 0.002025604248046875
+filter correctness test passed
+filter lookup miss rate: 0.15037593984962405
+filter lookup miss count: 60
+add_count: 801
+
+compile time: 6.258628606796265
+run time: 0.0021774768829345703
+filter correctness test passed
+filter lookup miss rate: 0.16080402010050251
+filter lookup miss count: 32

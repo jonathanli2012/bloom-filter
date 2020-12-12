@@ -46,52 +46,59 @@ def write_test_file_without_cout(file_name, add_count, b_size):
         print("  return 0;", file=f)
         print("}", file=f)
 
+def run_trace(add_count, b_size):
+    write_test_file_without_cout("test_fast.cpp", add_count, b_size)
+    write_test_file_with_cout("test.cpp", add_count, b_size)
 
-add_count = int(input("input value 1-999 for strings inserted: "))
-b_size = int(input("input value 1-6710886 for bloom filter size: "))
+    start_compile = time.time()
+    os.system("g++ -Ofast src/cityhash/city.cc src/bloom.cpp test_fast.cpp")
 
-write_test_file_without_cout("test_fast.cpp", add_count, b_size)
-write_test_file_with_cout("test.cpp", add_count, b_size)
+    start_run = time.time()
+    os.system("./a.out")
+    end_run = time.time()
 
-start_compile = time.time()
-os.system("g++ -Ofast src/cityhash/city.cc src/bloom.cpp test_fast.cpp")
+    os.system("g++ src/cityhash/city.cc src/bloom.cpp test.cpp")
+    os.system("./a.out > export.txt")
 
-start_run = time.time()
-os.system("./a.out")
-end_run = time.time()
+    os.remove("test_fast.cpp")
+    os.remove("test.cpp")
+    os.remove("./a.out")
 
-os.system("g++ src/cityhash/city.cc src/bloom.cpp test.cpp")
-os.system("./a.out > export.txt")
+    file1 = open('export.txt', 'r')
+    names = file1.readlines()
 
-os.remove("test_fast.cpp")
-os.remove("test.cpp")
-os.remove("./a.out")
+    print("")  # new line
+    print("compile time: " + str(start_run-start_compile))
+    print("run time: " + str(end_run-start_run))
 
-file1 = open('export.txt', 'r')
-names = file1.readlines()
+    count = 0
+    for i in names:
+        if(i.startswith("filter lookup:")):
+            if(i.endswith("1\n")):
+                count += 1
 
-print("")  # new line
-print("compile time: " + str(start_run-start_compile))
-print("run time: " + str(end_run-start_run))
+    correct = True
+    for i in names[1:add_count + 1]:
+        if(i.endswith("0\n")):
+            print("filter correctness test failed")
+            correct = False
 
-count = 0
-for i in names:
-    if(i.startswith("filter lookup:")):
-        if(i.endswith("1\n")):
-            count += 1
-
-correct = True
-for i in names[1:add_count + 1]:
-    if(i.endswith("0\n")):
-        print("filter correctness test failed")
-        correct = False
-
-if(correct):
-    print("filter correctness test passed")
+    if(correct):
+        print("filter correctness test passed")
 
 
-print("filter lookup miss rate: " + str((count - add_count)/(1000-add_count)))
-print("filter lookup miss count: " + str(count - add_count))
+    print("filter lookup miss rate: " + str((count - add_count)/(1000-add_count)))
+    print("filter lookup miss count: " + str(count - add_count))
 
-# comment this out to remove export view
-os.remove("export.txt")
+    # comment this out to remove export view
+    os.remove("export.txt")
+
+
+#add_count = int(input("input value 1-999 for strings inserted: "))
+#b_size = int(input("input value 1-6710886 for bloom filter size: "))
+#run_trace(add_count, b_size)
+
+
+for i in range(1,900,200):
+    print("add_count: " + str(i))
+    run_trace(i, 12)

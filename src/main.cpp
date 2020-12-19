@@ -28,7 +28,14 @@ int main(int argc, char *argv[]) {
   }
 
   int bloom_filter_size = std::stoi(argv[1], nullptr);
-  BloomFilter *b_filter = new BloomFilter(bloom_filter_size);
+  BloomFilter *b_filter;
+  try {
+    b_filter = new BloomFilter(bloom_filter_size);
+  }
+  catch(const char* msg){
+    std::cout << msg << std::endl;
+    return(-1);
+  }
 
   while (1) {
     std::cout << "> ";
@@ -45,7 +52,7 @@ int main(int argc, char *argv[]) {
     char instruction = command_line_text[0];
 
     // If the instruction is > 1 in length, we print usage
-    if (command_line_text[1] != ' ') {
+    if (command_line_text[1] != ' ' && command_line_text.length() != 1) {
       print_usage();
     }
     // Normal Execution

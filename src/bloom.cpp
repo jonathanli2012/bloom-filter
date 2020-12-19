@@ -4,6 +4,9 @@ namespace std {
 
 BloomFilter::BloomFilter(int filter_size) {
 
+  if(filter_size <= 0) {
+    throw "Don't be a shitter";
+  }
   //dynamically allocated uint64 array as bloom filter
   filter_ = new uint64[filter_size];
 
@@ -29,7 +32,7 @@ void BloomFilter::add_string(string str) {
   uint64 filter_index = bit_on >> DIV_64_SHIFT;
   //1 gets left shifted to the corresponding index
   //bit_on - (filter_index << DIV_64_SHIFT) localizes the bit to the array index
-  filter_[filter_index] |= 1 << (bit_on - (filter_index << DIV_64_SHIFT));
+  filter_[filter_index] |= 1UL << (bit_on - (filter_index << DIV_64_SHIFT));
   filter_count_ += 1;
 }
 
@@ -42,7 +45,7 @@ bool BloomFilter::lookup(string str) {
   //1 gets left shifted to the corresponding index
   //bit_on - (filter_index << DIV_64_SHIFT) localizes the bit to the array index
   return (filter_[filter_index] &
-          (1 << (bit_on - (filter_index << DIV_64_SHIFT)))) != 0;
+          (1UL << (bit_on - (filter_index << DIV_64_SHIFT)))) != 0;
 }
 
 
